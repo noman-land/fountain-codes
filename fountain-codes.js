@@ -67,7 +67,8 @@ function Decoder() {
       // this is terrible
       this.queue = this.queue.filter(queuedPacket => {
         if (queuedPacket.slices.indexOf(decodedSliceNumber) > -1) {
-          queuedPacket.slices = queuedPacket.slices.filter(sliceNumber => sliceNumber !== decodedSliceNumber);
+          queuedPacket.slices = queuedPacket.slices
+            .filter(sliceNumber => sliceNumber !== decodedSliceNumber);
           queuedPacket.result ^= packet.result;
           if (queuedPacket.slices.length === 1) {
             this.decoded[queuedPacket.slices[0]] = queuedPacket.result;
