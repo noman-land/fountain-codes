@@ -39,8 +39,8 @@ function Decoder() {
       this.length = packet.totalSlices;
     }
 
-    // 1. For each source block from the list, if we have already decoded it,
-    //    xor that block with the encoded block, and remove it from the list of source blocks.
+    // 1. For each source block from the list, if we have already decoded it, xor that
+    //    block with the encoded block, and remove it from the list of source blocks.
     packet.slices = packet.slices.filter(sliceNumber => {
       if (this.decoded[sliceNumber]) {
         packet.result ^= this.decoded[sliceNumber];
@@ -49,7 +49,8 @@ function Decoder() {
       return true;
     });
 
-    // 2. If there are at least two source blocks left in the list, add the encoded block to a holding area.
+    // 2. If there are at least two source blocks left in the list, add the encoded block
+    //    to a holding area.
     if (packet.slices.length > 1) {
       this.queue.push(packet);
       // This is a problem because it can give you duplicate packets in the queue
