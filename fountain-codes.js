@@ -1,5 +1,7 @@
-function getRandom(max = 1) {
-  return Math.floor((Math.random() * max));
+const MAX_SLICES = 3;
+
+function getRandom({ min = 0, max = 1 }) {
+  return Math.floor((Math.random() * max) + min);
 }
 
 function Encoder(data) {
@@ -9,10 +11,10 @@ function Encoder(data) {
   this.makePacket = () => {
     let result = 0;
     const slices = [];
-    const numSlices = getRandom(3) + 1;
+    const numSlices = getRandom({ max: MAX_SLICES, min: 1 });
 
     while (slices.length < numSlices) {
-      const randomSliceNumber = getRandom(this.dataLength);
+      const randomSliceNumber = getRandom({ max: this.dataLength });
       if (slices.indexOf(randomSliceNumber) === -1) {
         slices.push(randomSliceNumber);
         // XOR slice with previous slice(s)
